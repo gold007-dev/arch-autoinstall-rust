@@ -31,7 +31,10 @@ pub fn select_disk()-> libparted::Device<'static>{
     match ans {
         Ok(choice) => {
             if let Some(index) = device_names.clone().iter().position(|&name| name == choice) {
+                println!("{:?}",devices_list[index].path());
                 let device =Device::new(devices_list[index].path()).expect("Error opening device");
+                println!("Selected device: {}", device.model());
+                println!("{:?}",device.path());
                 return device;
             } else {
                 panic!("Device not found! exiting");
